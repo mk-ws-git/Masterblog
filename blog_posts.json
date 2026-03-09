@@ -10,5 +10,11 @@
         "author": "Jane Doe",
         "title": "Second Post",
         "content": "This is the second post."
+    },
+    {
+        "id": 3,
+        "author": "Jim Doe",
+        "title": "Third Post",
+        "content": "This is the third post."
     }
 ]

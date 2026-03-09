@@ -4,6 +4,7 @@ import os
 
 app = Flask(__name__)
 
+
 def load_posts():
     """Load blog posts from the JSON file."""
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -22,6 +23,22 @@ def save_posts(posts):
         json.dump(posts, post_file, indent=4)
 
 
+def fetch_post_by_id(post_id):
+    """Return one post by ID, or None if not found."""
+    posts = load_posts()
+    for post in posts:
+        if post["id"] == post_id:
+            return post
+    return None
+
+
+@app.route("/")
+def index():
+    # Load all blog posts and render the index page
+    posts = load_posts()
+    return render_template("index.html", posts=posts)
+
+
 @app.route("/add", methods=["GET", "POST"])
 def add():
     # Handle form submission to add a new blog post
@@ -32,13 +49,13 @@ def add():
 
         posts = load_posts()
 
-        # create new unique post ID
+        # Generate a new unique ID for the post
         if posts:
             new_id = max(post["id"] for post in posts) + 1
         else:
             new_id = 1
 
-       # create new post dictionary
+        # Create a new post dictionary
         new_post = {
             "id": new_id,
             "author": author,
@@ -46,7 +63,6 @@ def add():
             "content": content
         }
 
-        # add new post to the list and save json
         posts.append(new_post)
         save_posts(posts)
 
@@ -55,23 +71,36 @@ def add():
     return render_template("add.html")
 
 
-@app.route('/delete/<int:post_id>')
+@app.route("/delete/<int:post_id>")
 def delete(post_id):
-
     posts = load_posts()
-
-    # remove the post with matching id
     posts = [post for post in posts if post["id"] != post_id]
-
     save_posts(posts)
+    return redirect(url_for("index"))
 
-    return redirect(url_for('index'))
 
-
-@app.route("/")
-def index():
+@app.route("/update/<int:post_id>", methods=["GET", "POST"])
+def update(post_id):
     posts = load_posts()
-    return render_template("index.html", posts=posts)
+    post = None
+
+    for blog_post in posts:
+        if blog_post["id"] == post_id:
+            post = blog_post
+            break
+
+    if post is None:
+        return "Post not found", 404
+
+    if request.method == "POST":
+        post["author"] = request.form.get("author")
+        post["title"] = request.form.get("title")
+        post["content"] = request.form.get("content")
+
+        save_posts(posts)
+        return redirect(url_for("index"))
+
+    return render_template("update.html", post=post)
 
 
 if __name__ == "__main__":
