@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <h1>Masterblog</h1>
+  <a href="{{ url_for('add') }}" class="add-button">Add New Post</a>
 
   {% for post in posts %}
   <div class="post">

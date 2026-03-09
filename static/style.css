@@ -5,6 +5,29 @@ body {
     color: #333;
 }
 
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input,
+textarea,
+button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    cursor: pointer;
+}
+
 h1 {
     text-align: center;
     color: #4F4F4F;
@@ -24,4 +47,61 @@ h1 {
 
 .post p {
     margin: 10px 0;
+}
+
+.post-form {
+    max-width: 700px;
+    margin-top: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.form-actions button {
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+.back-link {
+    text-decoration: none;
+    padding: 10px 16px;
+}
+
+.back-link:hover {
+    background-color: #eee;
+}
+
+.add-button {
+    display: inline-block;
+    margin: 15px 0;
+    padding: 10px 14px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.add-button:hover {
+    background: #555;
 }
