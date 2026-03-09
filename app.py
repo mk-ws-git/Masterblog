@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import json
+import os
 
 app = Flask(__name__)
 
@@ -8,7 +9,7 @@ def load_posts():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     blog_posts = os.path.join(base_dir, "blog_posts.json")
 
-    with open('blog_posts', 'r') as post:
+    with open('blog_posts.json', 'r') as post:
         return json.load(post)
 
 
