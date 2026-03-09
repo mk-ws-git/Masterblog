@@ -3,18 +3,21 @@
         "id": 1,
         "author": "John Doe",
         "title": "First Post",
-        "content": "This is the first post."
+        "content": "This is the first post.",
+        "likes": 1
     },
     {
         "id": 2,
         "author": "Jane Doe",
         "title": "Second Post",
-        "content": "This is the second post."
+        "content": "This is the second post.",
+        "likes": 1
     },
     {
         "id": 3,
         "author": "Jim Doe",
         "title": "Third Post",
-        "content": "This is the third post."
+        "content": "This is the third post.",
+        "likes": 1
     }
 ]

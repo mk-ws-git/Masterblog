@@ -60,7 +60,8 @@ def add():
             "id": new_id,
             "author": author,
             "title": title,
-            "content": content
+            "content": content,
+            "likes": 0
         }
 
         posts.append(new_post)
@@ -101,6 +102,20 @@ def update(post_id):
         return redirect(url_for("index"))
 
     return render_template("update.html", post=post)
+
+
+@app.route('/like/<int:post_id>')
+def like(post_id):
+    posts = load_posts()
+
+    for post in posts:
+        if post["id"] == post_id:
+            post["likes"] = post.get("likes", 0) + 1
+            break
+
+    save_posts(posts)
+
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
